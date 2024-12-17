@@ -1,0 +1,69 @@
+{
+  "kind": "collectionType",
+  "collectionName": "purchases",
+  "info": {
+    "singularName": "purchase",
+    "pluralName": "purchases",
+    "displayName": "Purchase",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Date": {
+      "type": "datetime"
+    },
+    "BillNo": {
+      "type": "string"
+    },
+    "TotalAmount": {
+      "type": "decimal"
+    },
+    "PaymentStatus": {
+      "type": "enumeration",
+      "enum": [
+        "Pending",
+        "Paid",
+        "Partial"
+      ]
+    },
+    "Notes": {
+      "type": "text"
+    },
+    "websight_user": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::websight-user.websight-user",
+      "inversedBy": "purchases"
+    },
+    "PaymentMethod": {
+      "type": "enumeration",
+      "enum": [
+        "Cash",
+        "Bank Transfer",
+        "Check",
+        "Credit"
+      ]
+    },
+    "pieces": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::piece.piece",
+      "mappedBy": "purchase"
+    },
+    "transactions": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::transaction.transaction",
+      "mappedBy": "purchase"
+    },
+    "ecommerce_product_purchase_quantity": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::ecommerce-product-purchase-quantitie.ecommerce-product-purchase-quantitie",
+      "inversedBy": "purchases"
+    }
+  }
+}

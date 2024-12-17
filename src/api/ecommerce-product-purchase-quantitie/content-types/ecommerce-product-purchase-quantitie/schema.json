@@ -1,0 +1,36 @@
+{
+  "kind": "collectionType",
+  "collectionName": "ecommerce_product_purchase_quantities",
+  "info": {
+    "singularName": "ecommerce-product-purchase-quantitie",
+    "pluralName": "ecommerce-product-purchase-quantities",
+    "displayName": "EcommerceProductPurchaseQuantitie"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "product": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::product.product",
+      "inversedBy": "ecommerce_product_purchase_quantities"
+    },
+    "Quantity": {
+      "type": "decimal"
+    },
+    "warehouse": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::warehouse.warehouse",
+      "inversedBy": "ecommerce_product_purchase_quantities"
+    },
+    "purchases": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::purchase.purchase",
+      "mappedBy": "ecommerce_product_purchase_quantity"
+    }
+  }
+}

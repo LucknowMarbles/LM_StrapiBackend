@@ -25,6 +25,12 @@
     },
     "ZipCode": {
       "type": "string"
+    },
+    "sale_invoices": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::sale-invoice.sale-invoice",
+      "mappedBy": "billing_address"
     }
   }
 }

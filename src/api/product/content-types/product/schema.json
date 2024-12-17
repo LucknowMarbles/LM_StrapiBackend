@@ -4,7 +4,8 @@
   "info": {
     "singularName": "product",
     "pluralName": "products",
-    "displayName": "Product"
+    "displayName": "Product",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -21,14 +22,15 @@
       "type": "decimal"
     },
     "Image": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
       "allowedTypes": [
         "images",
         "files",
         "videos",
         "audios"
-      ],
-      "type": "media",
-      "multiple": true
+      ]
     },
     "Category": {
       "type": "enumeration",
@@ -60,6 +62,36 @@
     },
     "metaDescription": {
       "type": "text"
+    },
+    "transfers": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::transfer.transfer",
+      "mappedBy": "product"
+    },
+    "batches": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::batch.batch",
+      "mappedBy": "product"
+    },
+    "ecommerce_warehouse_quantities": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::ecommerce-warehouse-quantitie.ecommerce-warehouse-quantitie",
+      "mappedBy": "product"
+    },
+    "CreatedDate": {
+      "type": "datetime"
+    },
+    "EditedDate": {
+      "type": "datetime"
+    },
+    "ecommerce_product_purchase_quantities": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::ecommerce-product-purchase-quantitie.ecommerce-product-purchase-quantitie",
+      "mappedBy": "product"
     }
   }
 }

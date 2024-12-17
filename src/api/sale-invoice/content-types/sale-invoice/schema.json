@@ -1,0 +1,65 @@
+{
+  "kind": "collectionType",
+  "collectionName": "sale_invoices",
+  "info": {
+    "singularName": "sale-invoice",
+    "pluralName": "sale-invoices",
+    "displayName": "SaleInvoice",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "websight_user": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::websight-user.websight-user",
+      "inversedBy": "sale_invoices"
+    },
+    "delivery_address": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::address.address",
+      "inversedBy": "sale_invoices"
+    },
+    "billing_address": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::address.address",
+      "inversedBy": "sale_invoices"
+    },
+    "InvoiceNo": {
+      "type": "string"
+    },
+    "freight": {
+      "type": "decimal"
+    },
+    "ShippingStatus": {
+      "type": "enumeration",
+      "enum": [
+        "Pending",
+        "Confirmed",
+        "Shipped",
+        "Delivered",
+        "Cancelled"
+      ]
+    },
+    "Date": {
+      "type": "datetime"
+    },
+    "transactions": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::transaction.transaction",
+      "mappedBy": "sale_invoice"
+    },
+    "sale_data_for_pieces": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::sale-data-for-piece.sale-data-for-piece",
+      "mappedBy": "sale_invoice"
+    }
+  }
+}

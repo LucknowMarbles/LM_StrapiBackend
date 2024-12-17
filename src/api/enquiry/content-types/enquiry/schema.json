@@ -4,7 +4,8 @@
   "info": {
     "singularName": "enquiry",
     "pluralName": "enquiries",
-    "displayName": "Enquiry"
+    "displayName": "Enquiry",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -22,6 +23,18 @@
     },
     "DateOfEnquiry": {
       "type": "datetime"
+    },
+    "pieces": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::piece.piece",
+      "inversedBy": "enquiries"
+    },
+    "product_uses": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::product-use.product-use",
+      "mappedBy": "enquiry"
     }
   }
 }

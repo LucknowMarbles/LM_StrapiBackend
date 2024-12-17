@@ -25,6 +25,24 @@
     },
     "ModalUrl": {
       "type": "string"
+    },
+    "transfers": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::transfer.transfer",
+      "mappedBy": "warehouse"
+    },
+    "ecommerce_warehouse_quantities": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::ecommerce-warehouse-quantitie.ecommerce-warehouse-quantitie",
+      "mappedBy": "warehouse"
+    },
+    "ecommerce_product_purchase_quantities": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::ecommerce-product-purchase-quantitie.ecommerce-product-purchase-quantitie",
+      "mappedBy": "warehouse"
     }
   }
 }

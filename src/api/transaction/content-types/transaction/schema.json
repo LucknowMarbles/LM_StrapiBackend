@@ -1,0 +1,53 @@
+{
+  "kind": "collectionType",
+  "collectionName": "transactions",
+  "info": {
+    "singularName": "transaction",
+    "pluralName": "transactions",
+    "displayName": "Transaction"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Date": {
+      "type": "datetime"
+    },
+    "Type": {
+      "type": "enumeration",
+      "enum": [
+        "Payment",
+        "Receipt"
+      ]
+    },
+    "amount": {
+      "type": "decimal"
+    },
+    "websight_user": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::websight-user.websight-user",
+      "inversedBy": "transactions"
+    },
+    "InvoiceType": {
+      "type": "enumeration",
+      "enum": [
+        "Sale",
+        "Purchase"
+      ]
+    },
+    "sale_invoice": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::sale-invoice.sale-invoice",
+      "inversedBy": "transactions"
+    },
+    "purchase": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::purchase.purchase",
+      "inversedBy": "transactions"
+    }
+  }
+}

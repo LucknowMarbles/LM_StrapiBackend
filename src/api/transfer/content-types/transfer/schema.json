@@ -1,0 +1,60 @@
+{
+  "kind": "collectionType",
+  "collectionName": "transfers",
+  "info": {
+    "singularName": "transfer",
+    "pluralName": "transfers",
+    "displayName": "Transfer"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Type": {
+      "type": "enumeration",
+      "enum": [
+        "Ecommerce",
+        "Piece"
+      ]
+    },
+    "product": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::product.product",
+      "inversedBy": "transfers"
+    },
+    "pieces": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::piece.piece",
+      "inversedBy": "transfers"
+    },
+    "from_warehouse": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::warehouse.warehouse",
+      "inversedBy": "transfers"
+    },
+    "warehouse": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::warehouse.warehouse",
+      "inversedBy": "transfers"
+    },
+    "Quantity": {
+      "type": "decimal"
+    },
+    "Date": {
+      "type": "datetime"
+    },
+    "TranferStatus": {
+      "type": "enumeration",
+      "enum": [
+        "Pending",
+        "Completed",
+        "Cancelled"
+      ]
+    }
+  }
+}

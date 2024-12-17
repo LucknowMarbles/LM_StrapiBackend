@@ -4,7 +4,8 @@
   "info": {
     "singularName": "batch",
     "pluralName": "batches",
-    "displayName": "Batch"
+    "displayName": "Batch",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -25,6 +26,12 @@
       "relation": "oneToMany",
       "target": "api::products-enquiry.products-enquiry",
       "mappedBy": "batch"
+    },
+    "product": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::product.product",
+      "inversedBy": "batches"
     }
   }
 }

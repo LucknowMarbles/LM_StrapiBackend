@@ -392,6 +392,10 @@ export interface ApiAddressAddress extends Struct.CollectionTypeSchema {
     > &
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
+    sale_invoices: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::sale-invoice.sale-invoice'
+    >;
     State: Schema.Attribute.String;
     Street: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
@@ -404,6 +408,7 @@ export interface ApiAddressAddress extends Struct.CollectionTypeSchema {
 export interface ApiBatchBatch extends Struct.CollectionTypeSchema {
   collectionName: 'batches';
   info: {
+    description: '';
     displayName: 'Batch';
     pluralName: 'batches';
     singularName: 'batch';
@@ -420,6 +425,7 @@ export interface ApiBatchBatch extends Struct.CollectionTypeSchema {
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::batch.batch'> &
       Schema.Attribute.Private;
     pieces: Schema.Attribute.Relation<'oneToMany', 'api::piece.piece'>;
+    product: Schema.Attribute.Relation<'manyToOne', 'api::product.product'>;
     products_enquiries: Schema.Attribute.Relation<
       'oneToMany',
       'api::products-enquiry.products-enquiry'
@@ -462,10 +468,46 @@ export interface ApiContactContact extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiEcommerceProductPurchaseQuantitieEcommerceProductPurchaseQuantitie
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'ecommerce_product_purchase_quantities';
+  info: {
+    displayName: 'EcommerceProductPurchaseQuantitie';
+    pluralName: 'ecommerce-product-purchase-quantities';
+    singularName: 'ecommerce-product-purchase-quantitie';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::ecommerce-product-purchase-quantitie.ecommerce-product-purchase-quantitie'
+    > &
+      Schema.Attribute.Private;
+    product: Schema.Attribute.Relation<'manyToOne', 'api::product.product'>;
+    publishedAt: Schema.Attribute.DateTime;
+    purchases: Schema.Attribute.Relation<'oneToMany', 'api::purchase.purchase'>;
+    Quantity: Schema.Attribute.Decimal;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    warehouse: Schema.Attribute.Relation<
+      'manyToOne',
+      'api::warehouse.warehouse'
+    >;
+  };
+}
+
 export interface ApiEcommerceWarehouseQuantitieEcommerceWarehouseQuantitie
   extends Struct.CollectionTypeSchema {
   collectionName: 'ecommerce_warehouse_quantities';
   info: {
+    description: '';
     displayName: 'EcommerceWarehouseQuantitie';
     pluralName: 'ecommerce-warehouse-quantities';
     singularName: 'ecommerce-warehouse-quantitie';
@@ -483,17 +525,23 @@ export interface ApiEcommerceWarehouseQuantitieEcommerceWarehouseQuantitie
       'api::ecommerce-warehouse-quantitie.ecommerce-warehouse-quantitie'
     > &
       Schema.Attribute.Private;
+    product: Schema.Attribute.Relation<'manyToOne', 'api::product.product'>;
     publishedAt: Schema.Attribute.DateTime;
     Quantity: Schema.Attribute.Decimal;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    warehouse: Schema.Attribute.Relation<
+      'manyToOne',
+      'api::warehouse.warehouse'
+    >;
   };
 }
 
 export interface ApiEnquiryEnquiry extends Struct.CollectionTypeSchema {
   collectionName: 'enquiries';
   info: {
+    description: '';
     displayName: 'Enquiry';
     pluralName: 'enquiries';
     singularName: 'enquiry';
@@ -513,6 +561,11 @@ export interface ApiEnquiryEnquiry extends Struct.CollectionTypeSchema {
       'api::enquiry.enquiry'
     > &
       Schema.Attribute.Private;
+    pieces: Schema.Attribute.Relation<'manyToMany', 'api::piece.piece'>;
+    product_uses: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::product-use.product-use'
+    >;
     publishedAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -578,6 +631,7 @@ export interface ApiPiecePiece extends Struct.CollectionTypeSchema {
       'oneToOne',
       'api::warehouse.warehouse'
     >;
+    enquiries: Schema.Attribute.Relation<'manyToMany', 'api::enquiry.enquiry'>;
     IsDeffective: Schema.Attribute.Boolean;
     IsSold: Schema.Attribute.Boolean;
     Length: Schema.Attribute.Integer;
@@ -594,10 +648,19 @@ export interface ApiPiecePiece extends Struct.CollectionTypeSchema {
       'api::products-enquiry.products-enquiry'
     >;
     publishedAt: Schema.Attribute.DateTime;
+    purchase: Schema.Attribute.Relation<'manyToOne', 'api::purchase.purchase'>;
+    sale_data_for_pieces: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::sale-data-for-piece.sale-data-for-piece'
+    >;
     SoldArea: Schema.Attribute.Decimal;
     Thickness: Schema.Attribute.Decimal;
     TraderLength: Schema.Attribute.Integer;
     TraderWidth: Schema.Attribute.Integer;
+    transfers: Schema.Attribute.Relation<
+      'manyToMany',
+      'api::transfer.transfer'
+    >;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -619,6 +682,7 @@ export interface ApiProductUseProductUse extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    enquiry: Schema.Attribute.Relation<'manyToOne', 'api::enquiry.enquiry'>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -641,6 +705,7 @@ export interface ApiProductUseProductUse extends Struct.CollectionTypeSchema {
 export interface ApiProductProduct extends Struct.CollectionTypeSchema {
   collectionName: 'products';
   info: {
+    description: '';
     displayName: 'Product';
     pluralName: 'products';
     singularName: 'product';
@@ -649,13 +714,24 @@ export interface ApiProductProduct extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
+    batches: Schema.Attribute.Relation<'oneToMany', 'api::batch.batch'>;
     Category: Schema.Attribute.Enumeration<
       ['Marble', 'Granite', 'Temple', 'Fountain']
     >;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    CreatedDate: Schema.Attribute.DateTime;
     Description: Schema.Attribute.Text;
+    ecommerce_product_purchase_quantities: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::ecommerce-product-purchase-quantitie.ecommerce-product-purchase-quantitie'
+    >;
+    ecommerce_warehouse_quantities: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::ecommerce-warehouse-quantitie.ecommerce-warehouse-quantitie'
+    >;
+    EditedDate: Schema.Attribute.DateTime;
     Image: Schema.Attribute.Media<
       'images' | 'files' | 'videos' | 'audios',
       true
@@ -677,6 +753,7 @@ export interface ApiProductProduct extends Struct.CollectionTypeSchema {
     Tag: Schema.Attribute.Enumeration<
       ['Red', 'White', 'Big Grain', 'Small Grain', 'Figure', 'Plain']
     >;
+    transfers: Schema.Attribute.Relation<'oneToMany', 'api::transfer.transfer'>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -719,6 +796,146 @@ export interface ApiProductsEnquiryProductsEnquiry
   };
 }
 
+export interface ApiPurchasePurchase extends Struct.CollectionTypeSchema {
+  collectionName: 'purchases';
+  info: {
+    description: '';
+    displayName: 'Purchase';
+    pluralName: 'purchases';
+    singularName: 'purchase';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    BillNo: Schema.Attribute.String;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    Date: Schema.Attribute.DateTime;
+    ecommerce_product_purchase_quantity: Schema.Attribute.Relation<
+      'manyToOne',
+      'api::ecommerce-product-purchase-quantitie.ecommerce-product-purchase-quantitie'
+    >;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::purchase.purchase'
+    > &
+      Schema.Attribute.Private;
+    Notes: Schema.Attribute.Text;
+    PaymentMethod: Schema.Attribute.Enumeration<
+      ['Cash', 'Bank Transfer', 'Check', 'Credit']
+    >;
+    PaymentStatus: Schema.Attribute.Enumeration<['Pending', 'Paid', 'Partial']>;
+    pieces: Schema.Attribute.Relation<'oneToMany', 'api::piece.piece'>;
+    publishedAt: Schema.Attribute.DateTime;
+    TotalAmount: Schema.Attribute.Decimal;
+    transactions: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::transaction.transaction'
+    >;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    websight_user: Schema.Attribute.Relation<
+      'manyToOne',
+      'api::websight-user.websight-user'
+    >;
+  };
+}
+
+export interface ApiSaleDataForPieceSaleDataForPiece
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'sale_data_for_pieces';
+  info: {
+    displayName: 'SaleDataForPiece';
+    pluralName: 'sale-data-for-pieces';
+    singularName: 'sale-data-for-piece';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::sale-data-for-piece.sale-data-for-piece'
+    > &
+      Schema.Attribute.Private;
+    piece: Schema.Attribute.Relation<'manyToOne', 'api::piece.piece'>;
+    PricePerUnitArea: Schema.Attribute.Decimal;
+    publishedAt: Schema.Attribute.DateTime;
+    sale_invoice: Schema.Attribute.Relation<
+      'manyToOne',
+      'api::sale-invoice.sale-invoice'
+    >;
+    SaleAreaForThePiece: Schema.Attribute.Decimal;
+    SaleLength: Schema.Attribute.Integer;
+    SaleWidth: Schema.Attribute.Integer;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiSaleInvoiceSaleInvoice extends Struct.CollectionTypeSchema {
+  collectionName: 'sale_invoices';
+  info: {
+    description: '';
+    displayName: 'SaleInvoice';
+    pluralName: 'sale-invoices';
+    singularName: 'sale-invoice';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    billing_address: Schema.Attribute.Relation<
+      'manyToOne',
+      'api::address.address'
+    >;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    Date: Schema.Attribute.DateTime;
+    delivery_address: Schema.Attribute.Relation<
+      'manyToOne',
+      'api::address.address'
+    >;
+    freight: Schema.Attribute.Decimal;
+    InvoiceNo: Schema.Attribute.String;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::sale-invoice.sale-invoice'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    sale_data_for_pieces: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::sale-data-for-piece.sale-data-for-piece'
+    >;
+    ShippingStatus: Schema.Attribute.Enumeration<
+      ['Pending', 'Confirmed', 'Shipped', 'Delivered', 'Cancelled']
+    >;
+    transactions: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::transaction.transaction'
+    >;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    websight_user: Schema.Attribute.Relation<
+      'manyToOne',
+      'api::websight-user.websight-user'
+    >;
+  };
+}
+
 export interface ApiSizeSize extends Struct.CollectionTypeSchema {
   collectionName: 'sizes';
   info: {
@@ -746,6 +963,89 @@ export interface ApiSizeSize extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiTransactionTransaction extends Struct.CollectionTypeSchema {
+  collectionName: 'transactions';
+  info: {
+    displayName: 'Transaction';
+    pluralName: 'transactions';
+    singularName: 'transaction';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    amount: Schema.Attribute.Decimal;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    Date: Schema.Attribute.DateTime;
+    InvoiceType: Schema.Attribute.Enumeration<['Sale', 'Purchase']>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::transaction.transaction'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    purchase: Schema.Attribute.Relation<'manyToOne', 'api::purchase.purchase'>;
+    sale_invoice: Schema.Attribute.Relation<
+      'manyToOne',
+      'api::sale-invoice.sale-invoice'
+    >;
+    Type: Schema.Attribute.Enumeration<['Payment', 'Receipt']>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    websight_user: Schema.Attribute.Relation<
+      'manyToOne',
+      'api::websight-user.websight-user'
+    >;
+  };
+}
+
+export interface ApiTransferTransfer extends Struct.CollectionTypeSchema {
+  collectionName: 'transfers';
+  info: {
+    displayName: 'Transfer';
+    pluralName: 'transfers';
+    singularName: 'transfer';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    Date: Schema.Attribute.DateTime;
+    from_warehouse: Schema.Attribute.Relation<
+      'manyToOne',
+      'api::warehouse.warehouse'
+    >;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::transfer.transfer'
+    > &
+      Schema.Attribute.Private;
+    pieces: Schema.Attribute.Relation<'manyToMany', 'api::piece.piece'>;
+    product: Schema.Attribute.Relation<'manyToOne', 'api::product.product'>;
+    publishedAt: Schema.Attribute.DateTime;
+    Quantity: Schema.Attribute.Decimal;
+    TranferStatus: Schema.Attribute.Enumeration<
+      ['Pending', 'Completed', 'Cancelled']
+    >;
+    Type: Schema.Attribute.Enumeration<['Ecommerce', 'Piece']>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    warehouse: Schema.Attribute.Relation<
+      'manyToOne',
+      'api::warehouse.warehouse'
+    >;
+  };
+}
+
 export interface ApiWarehouseWarehouse extends Struct.CollectionTypeSchema {
   collectionName: 'warehouses';
   info: {
@@ -763,6 +1063,14 @@ export interface ApiWarehouseWarehouse extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    ecommerce_product_purchase_quantities: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::ecommerce-product-purchase-quantitie.ecommerce-product-purchase-quantitie'
+    >;
+    ecommerce_warehouse_quantities: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::ecommerce-warehouse-quantitie.ecommerce-warehouse-quantitie'
+    >;
     IsActive: Schema.Attribute.Boolean;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
@@ -772,6 +1080,7 @@ export interface ApiWarehouseWarehouse extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private;
     ModalUrl: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
+    transfers: Schema.Attribute.Relation<'oneToMany', 'api::transfer.transfer'>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -804,6 +1113,15 @@ export interface ApiWebsightUserWebsightUser
     Name: Schema.Attribute.String;
     Password: Schema.Attribute.Password;
     publishedAt: Schema.Attribute.DateTime;
+    purchases: Schema.Attribute.Relation<'oneToMany', 'api::purchase.purchase'>;
+    sale_invoices: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::sale-invoice.sale-invoice'
+    >;
+    transactions: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::transaction.transaction'
+    >;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1336,6 +1654,7 @@ declare module '@strapi/strapi' {
       'api::address.address': ApiAddressAddress;
       'api::batch.batch': ApiBatchBatch;
       'api::contact.contact': ApiContactContact;
+      'api::ecommerce-product-purchase-quantitie.ecommerce-product-purchase-quantitie': ApiEcommerceProductPurchaseQuantitieEcommerceProductPurchaseQuantitie;
       'api::ecommerce-warehouse-quantitie.ecommerce-warehouse-quantitie': ApiEcommerceWarehouseQuantitieEcommerceWarehouseQuantitie;
       'api::enquiry.enquiry': ApiEnquiryEnquiry;
       'api::location-history.location-history': ApiLocationHistoryLocationHistory;
@@ -1343,7 +1662,12 @@ declare module '@strapi/strapi' {
       'api::product-use.product-use': ApiProductUseProductUse;
       'api::product.product': ApiProductProduct;
       'api::products-enquiry.products-enquiry': ApiProductsEnquiryProductsEnquiry;
+      'api::purchase.purchase': ApiPurchasePurchase;
+      'api::sale-data-for-piece.sale-data-for-piece': ApiSaleDataForPieceSaleDataForPiece;
+      'api::sale-invoice.sale-invoice': ApiSaleInvoiceSaleInvoice;
       'api::size.size': ApiSizeSize;
+      'api::transaction.transaction': ApiTransactionTransaction;
+      'api::transfer.transfer': ApiTransferTransfer;
       'api::warehouse.warehouse': ApiWarehouseWarehouse;
       'api::websight-user.websight-user': ApiWebsightUserWebsightUser;
       'plugin::content-releases.release': PluginContentReleasesRelease;

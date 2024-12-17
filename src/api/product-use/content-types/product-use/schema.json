@@ -24,6 +24,12 @@
       "relation": "manyToOne",
       "target": "api::products-enquiry.products-enquiry",
       "inversedBy": "product_uses"
+    },
+    "enquiry": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::enquiry.enquiry",
+      "inversedBy": "product_uses"
     }
   }
 }

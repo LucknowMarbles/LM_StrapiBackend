@@ -4,7 +4,8 @@
   "info": {
     "singularName": "ecommerce-warehouse-quantitie",
     "pluralName": "ecommerce-warehouse-quantities",
-    "displayName": "EcommerceWarehouseQuantitie"
+    "displayName": "EcommerceWarehouseQuantitie",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -13,6 +14,18 @@
   "attributes": {
     "Quantity": {
       "type": "decimal"
+    },
+    "warehouse": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::warehouse.warehouse",
+      "inversedBy": "ecommerce_warehouse_quantities"
+    },
+    "product": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::product.product",
+      "inversedBy": "ecommerce_warehouse_quantities"
     }
   }
 }

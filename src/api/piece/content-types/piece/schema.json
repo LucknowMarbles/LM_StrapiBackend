@@ -61,6 +61,30 @@
       "relation": "oneToMany",
       "target": "api::location-history.location-history",
       "mappedBy": "piece"
+    },
+    "transfers": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::transfer.transfer",
+      "mappedBy": "pieces"
+    },
+    "enquiries": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::enquiry.enquiry",
+      "mappedBy": "pieces"
+    },
+    "purchase": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::purchase.purchase",
+      "inversedBy": "pieces"
+    },
+    "sale_data_for_pieces": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::sale-data-for-piece.sale-data-for-piece",
+      "mappedBy": "piece"
     }
   }
 }

@@ -1,0 +1,39 @@
+{
+  "kind": "collectionType",
+  "collectionName": "sale_data_for_pieces",
+  "info": {
+    "singularName": "sale-data-for-piece",
+    "pluralName": "sale-data-for-pieces",
+    "displayName": "SaleDataForPiece"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "piece": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::piece.piece",
+      "inversedBy": "sale_data_for_pieces"
+    },
+    "SaleLength": {
+      "type": "integer"
+    },
+    "SaleWidth": {
+      "type": "integer"
+    },
+    "SaleAreaForThePiece": {
+      "type": "decimal"
+    },
+    "PricePerUnitArea": {
+      "type": "decimal"
+    },
+    "sale_invoice": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::sale-invoice.sale-invoice",
+      "inversedBy": "sale_data_for_pieces"
+    }
+  }
+}

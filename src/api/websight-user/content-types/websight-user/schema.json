@@ -42,6 +42,24 @@
       "relation": "oneToMany",
       "target": "api::enquiry.enquiry",
       "mappedBy": "websight_user"
+    },
+    "purchases": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::purchase.purchase",
+      "mappedBy": "websight_user"
+    },
+    "transactions": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::transaction.transaction",
+      "mappedBy": "websight_user"
+    },
+    "sale_invoices": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::sale-invoice.sale-invoice",
+      "mappedBy": "websight_user"
     }
   }
 }
