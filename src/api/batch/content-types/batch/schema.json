@@ -1,0 +1,30 @@
+{
+  "kind": "collectionType",
+  "collectionName": "batches",
+  "info": {
+    "singularName": "batch",
+    "pluralName": "batches",
+    "displayName": "Batch"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "BatchNo": {
+      "type": "string"
+    },
+    "pieces": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::piece.piece",
+      "mappedBy": "batch"
+    },
+    "products_enquiries": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::products-enquiry.products-enquiry",
+      "mappedBy": "batch"
+    }
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "kind": "collectionType",
+  "collectionName": "warehouses",
+  "info": {
+    "singularName": "warehouse",
+    "pluralName": "warehouses",
+    "displayName": "Warehouse",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Capacity": {
+      "type": "decimal"
+    },
+    "IsActive": {
+      "type": "boolean"
+    },
+    "contact": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::contact.contact"
+    },
+    "ModalUrl": {
+      "type": "string"
+    }
+  }
+}

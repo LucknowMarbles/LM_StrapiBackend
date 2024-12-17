@@ -1,0 +1,18 @@
+{
+  "kind": "collectionType",
+  "collectionName": "ecommerce_warehouse_quantities",
+  "info": {
+    "singularName": "ecommerce-warehouse-quantitie",
+    "pluralName": "ecommerce-warehouse-quantities",
+    "displayName": "EcommerceWarehouseQuantitie"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Quantity": {
+      "type": "decimal"
+    }
+  }
+}

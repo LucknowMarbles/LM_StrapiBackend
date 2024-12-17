@@ -1,0 +1,27 @@
+{
+  "kind": "collectionType",
+  "collectionName": "enquiries",
+  "info": {
+    "singularName": "enquiry",
+    "pluralName": "enquiries",
+    "displayName": "Enquiry"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Discription": {
+      "type": "string"
+    },
+    "websight_user": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::websight-user.websight-user",
+      "inversedBy": "enquiries"
+    },
+    "DateOfEnquiry": {
+      "type": "datetime"
+    }
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "kind": "collectionType",
+  "collectionName": "sizes",
+  "info": {
+    "singularName": "size",
+    "pluralName": "sizes",
+    "displayName": "Size"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Length": {
+      "type": "decimal"
+    },
+    "Width": {
+      "type": "decimal"
+    },
+    "HeightOrThickness": {
+      "type": "decimal"
+    }
+  }
+}

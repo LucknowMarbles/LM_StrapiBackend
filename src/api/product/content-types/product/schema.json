@@ -1,0 +1,65 @@
+{
+  "kind": "collectionType",
+  "collectionName": "products",
+  "info": {
+    "singularName": "product",
+    "pluralName": "products",
+    "displayName": "Product"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Name": {
+      "type": "string"
+    },
+    "Description": {
+      "type": "text"
+    },
+    "Price": {
+      "type": "decimal"
+    },
+    "Image": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": true
+    },
+    "Category": {
+      "type": "enumeration",
+      "enum": [
+        "Marble",
+        "Granite",
+        "Temple",
+        "Fountain"
+      ]
+    },
+    "Tag": {
+      "type": "enumeration",
+      "enum": [
+        "Red",
+        "White",
+        "Big Grain",
+        "Small Grain",
+        "Figure",
+        "Plain"
+      ]
+    },
+    "isecommerce": {
+      "type": "boolean",
+      "default": true,
+      "required": true
+    },
+    "metaTitle": {
+      "type": "text"
+    },
+    "metaDescription": {
+      "type": "text"
+    }
+  }
+}

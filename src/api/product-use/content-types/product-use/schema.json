@@ -1,0 +1,29 @@
+{
+  "kind": "collectionType",
+  "collectionName": "product_uses",
+  "info": {
+    "singularName": "product-use",
+    "pluralName": "product-uses",
+    "displayName": "ProductUse"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "size": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::size.size"
+    },
+    "Use": {
+      "type": "string"
+    },
+    "products_enquiry": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::products-enquiry.products-enquiry",
+      "inversedBy": "product_uses"
+    }
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "kind": "collectionType",
+  "collectionName": "products_enquiries",
+  "info": {
+    "singularName": "products-enquiry",
+    "pluralName": "products-enquiries",
+    "displayName": "ProductsEnquiry",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "batch": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::batch.batch",
+      "inversedBy": "products_enquiries"
+    },
+    "Quantity": {
+      "type": "decimal"
+    },
+    "pieces": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::piece.piece",
+      "mappedBy": "products_enquiry"
+    },
+    "product_uses": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::product-use.product-use",
+      "mappedBy": "products_enquiry"
+    }
+  }
+}
